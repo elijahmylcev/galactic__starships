@@ -6,7 +6,7 @@
         :key="item.id"
         class="list-group-item"
       >
-        {{ item[namingProperty] }}
+        <router-link to="/about">{{ item[namingProperty] }}</router-link>
       </li>
     </ul>
   </div>
