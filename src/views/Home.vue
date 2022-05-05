@@ -1,10 +1,16 @@
 <template>
   <div class="home">
+    <h1 style="color: white">Starships</h1>
     <StarshipsList
           :items="starships.value"
           namingProperty="name"
           class="list"
-        />
+    />
+
+    <div class="button__wrapper">
+      <button type="button" class="btn btn-outline-light"> prev </button>
+    <button type="button" class="btn btn-outline-light"> next </button>
+    </div>
   </div>
 </template>
 
@@ -41,3 +47,11 @@ export default {
 
 };
 </script>
+
+<style lang="scss" scoped>
+  .button__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+</style>
