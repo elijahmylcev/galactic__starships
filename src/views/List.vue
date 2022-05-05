@@ -21,7 +21,7 @@ import Swapi from '../services/swapi-service';
 const _service = new Swapi();
 
 export default {
-  name: 'Home',
+  name: 'List',
 
   components: {
     StarshipsList,
