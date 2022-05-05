@@ -1,18 +1,43 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <StarshipsList
+          :items="starships.value"
+          namingProperty="name"
+          class="list"
+        />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import StarshipsList from '@/components/StarshipsList.vue';
+import Swapi from '../services/swapi-service';
+
+const _service = new Swapi();
 
 export default {
   name: 'Home',
+
   components: {
-    HelloWorld,
+    StarshipsList,
   },
+
+  data: () => ({
+    starships: {
+      value: [],
+      loading: true,
+    },
+
+    selectedStarship: {
+      value: {},
+      loading: true,
+    },
+  }),
+
+  async mounted() {
+    const starships = await _service.getAllStarships(3);
+    this.starships.value = [...starships];
+    this.starships.loading = false;
+  },
+
 };
 </script>
