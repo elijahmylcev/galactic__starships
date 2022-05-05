@@ -8,8 +8,8 @@
     />
 
     <div class="button__wrapper">
-      <button type="button" class="btn btn-outline-light"> prev </button>
-    <button type="button" class="btn btn-outline-light"> next </button>
+      <button type="button" class="btn btn-outline-light" @click="onPrev"> prev </button>
+      <button type="button" class="btn btn-outline-light" @click="onNext"> next </button>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   },
 
   data: () => ({
+    page: 1,
     starships: {
       value: [],
       loading: true,
@@ -40,9 +41,26 @@ export default {
   }),
 
   async mounted() {
-    const starships = await _service.getAllStarships(3);
+    const starships = await _service.getAllStarships(this.page);
     this.starships.value = [...starships];
     this.starships.loading = false;
+  },
+
+  methods: {
+    async onNext() {
+      if (this.page <= 3) {
+        this.page += 1;
+        const starships = await _service.getAllStarships(this.page);
+        this.starships.value = [...starships];
+      }
+    },
+    async onPrev() {
+      if (this.page >= 2 && this.page <= 4) {
+        this.page -= 1;
+        const starships = await _service.getAllStarships(this.page);
+        this.starships.value = [...starships];
+      }
+    },
   },
 
 };
@@ -53,5 +71,8 @@ export default {
     display: flex;
     justify-content: center;
     gap: 30px;
+    button {
+      padding: 8px 20px;
+    }
   }
 </style>
