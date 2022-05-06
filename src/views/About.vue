@@ -45,7 +45,6 @@ export default {
 
   async mounted() {
     const starship = await _service.getStarship(this.id);
-    console.log(starship);
     const result = await fetch(starship.adress);
     if (!result.ok) {
       starship.hasBrokenImage = true;

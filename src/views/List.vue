@@ -39,17 +39,9 @@ export default {
     searchQuery: '',
   }),
 
-  props: {
-    modelValue: {
-      type: String,
-      default: null,
-    },
-  },
-
   async mounted() {
     const starships = await _service.getAllStarships(this.page);
     this.starships.value = [...starships];
-    this.starships.loading = false;
   },
 
   methods: {
