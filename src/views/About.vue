@@ -2,21 +2,26 @@
   <div>
     <h2> {{item.name}} </h2>
     <div class="about">
-    <div class="about__image">
-      <ErrorIndicator v-if="item.hasBrokenImage" />
-      <img v-else  class="img" :src="item.adress" />
+      <div class="about__image">
+        <ErrorIndicator v-if="item.hasBrokenImage" />
+        <img v-else  class="img" :src="item.adress" />
+      </div>
+
+      <ul class="listStarshipsDetails">
+        <li class="listStarshipsDetails__item"
+        v-for="(value, name) in item"
+        :key="value">
+          <span>{{ name }}:</span>
+          <span>{{ value }}</span>
+        </li>
+      </ul>
     </div>
-
-    <ul class="listStarshipsDetails">
-      <li class="listStarshipsDetails__item"
-      v-for="(value, name) in item"
-      :key="value">
-        <span>{{ name }}:</span>
-        <span>{{ value }}</span>
-      </li>
-    </ul>
-
-  </div>
+    <button
+      type="button"
+      class="btn btn-outline-warning"
+      @click="$router.push({ path: '/' })">
+      Back to List
+    </button>
   </div>
 </template>
 
