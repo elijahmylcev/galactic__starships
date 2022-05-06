@@ -24,7 +24,7 @@ const _service = new Swapi();
 export default {
   data() {
     return {
-      id: 5,
+      id: this.$route.query.id,
       item: {},
     };
   },

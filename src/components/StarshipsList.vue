@@ -1,14 +1,12 @@
 <template>
-  <div style="height: content">
-    <ul class="item-list list-group">
-      <li
-        v-for="item in items"
-        :key="item.id"
-        class="list-group-item"
-      >
-        <router-link to="/about">{{ item[namingProperty] }}</router-link>
-      </li>
-    </ul>
+  <div style="height: content" class="item-list list-group">
+    <router-link
+    v-for="item in items"
+    :key="item.id"
+    class="list-group-item"
+    :to=" { path: '/about/', query: {id: item.id} } " >
+      {{ item[namingProperty] }}
+    </router-link>
   </div>
 
 </template>
@@ -27,10 +25,6 @@ export default {
       type: String,
       default: 'name',
     },
-    // loading: {
-    //   type: Boolean,
-    //   required: true,
-    // },
   },
 
   // methods: {
