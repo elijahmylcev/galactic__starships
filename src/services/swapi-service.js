@@ -40,6 +40,8 @@ export default class SwapiService {
       crew: starship.crew,
       passengers: starship.passengers,
       cargoCopacity: starship.cargoCopacity,
+      starshipClass: starship.starship_class,
+      consumables: starship.consumables,
       adress: `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`,
     };
   };

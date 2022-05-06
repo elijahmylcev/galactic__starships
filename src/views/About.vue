@@ -1,22 +1,24 @@
 <template>
   <div class="about">
+    <div class="about__image">
+      <ErrorIndicator v-if="item.hasBrokenImage" />
+      <img v-else  class="img" :src="item.adress" />
+    </div>
 
-        <img class="img" :src="item.adress" />
-
-        <ul class="listStarshipsDetails"
-        >
-          <li class="listStarshipsDetails__item"
-          v-for="(value, name) in item"
-          :key="value">
-            <span>{{ name }}:</span>
-            <span>{{ value }}</span>
-          </li>
-        </ul>
+    <ul class="listStarshipsDetails">
+      <li class="listStarshipsDetails__item"
+      v-for="(value, name) in item"
+      :key="value">
+        <span>{{ name }}:</span>
+        <span>{{ value }}</span>
+      </li>
+    </ul>
 
   </div>
 </template>
 
 <script>
+import ErrorIndicator from '@/components/ErrorIndicator.vue';
 import Swapi from '../services/swapi-service';
 
 const _service = new Swapi();
@@ -27,6 +29,10 @@ export default {
       id: this.$route.query.id,
       item: {},
     };
+  },
+
+  components: {
+    ErrorIndicator,
   },
 
   async mounted() {
@@ -45,14 +51,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.img {
-  width: 70%;
-  display: block;
-  margin: 0 auto;
+.about {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  &__image {
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .listStarshipsDetails {
-  width: 60%;
+  width: 35%;
   padding: 15px;
   list-style-type: none;
   display: flex;
