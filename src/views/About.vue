@@ -1,5 +1,7 @@
 <template>
-  <div class="about">
+  <div>
+    <h2> {{item.name}} </h2>
+    <div class="about">
     <div class="about__image">
       <ErrorIndicator v-if="item.hasBrokenImage" />
       <img v-else  class="img" :src="item.adress" />
@@ -14,6 +16,7 @@
       </li>
     </ul>
 
+  </div>
   </div>
 </template>
 
@@ -51,6 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  color: #42b983;
+  font-weight: bold;
+}
 .about {
   margin-top: 50px;
   display: flex;

@@ -67,12 +67,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .button__wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    button {
-      padding: 8px 20px;
-    }
+.button__wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  button {
+    padding: 8px 20px;
   }
+}
 </style>

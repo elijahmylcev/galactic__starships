@@ -4,7 +4,7 @@
     v-for="item in items"
     :key="item.id"
     class="list-group-item"
-    :to=" { path: '/about/', query: {id: item.id} } " >
+    :to=" { path: '/about/', query: {id: item.id} }" >
       {{ item[namingProperty] }}
     </router-link>
   </div>
@@ -26,17 +26,12 @@ export default {
       default: 'name',
     },
   },
-
-  // methods: {
-  //   onItemSelected(item) {
-  //     this.$emit("on-item-click", item.id);
-  //   },
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
 .item-list {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
