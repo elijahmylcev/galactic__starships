@@ -1,10 +1,11 @@
 <template>
   <div class="home">
-    <h1 style="color: white">Starships</h1>
+    <h1>Starships</h1>
+    <search v-model="searchQuery"/>
     <StarshipsList
-          :items="starships.value"
-          namingProperty="name"
-          class="list"
+      :items="SearchedList"
+      namingProperty="name"
+      class="list"
     />
 
     <div class="button__wrapper">
@@ -17,6 +18,7 @@
 <script>
 import StarshipsList from '@/components/StarshipsList.vue';
 import Swapi from '../services/swapi-service';
+import Search from '../components/Search.vue';
 
 const _service = new Swapi();
 
@@ -25,20 +27,24 @@ export default {
 
   components: {
     StarshipsList,
+    Search,
   },
 
   data: () => ({
     page: 1,
     starships: {
       value: [],
-      loading: true,
     },
 
-    selectedStarship: {
-      value: {},
-      loading: true,
-    },
+    searchQuery: '',
   }),
+
+  props: {
+    modelValue: {
+      type: String,
+      default: null,
+    },
+  },
 
   async mounted() {
     const starships = await _service.getAllStarships(this.page);
@@ -63,6 +69,16 @@ export default {
     },
   },
 
+  computed: {
+    SearchedList() {
+      if (this.searchQuery !== '') {
+        return this.starships.value.filter((starship) => starship.name.toLowerCase()
+          .includes(this.searchQuery.toLowerCase()));
+      }
+      return this.starships.value;
+    },
+  },
+
 };
 </script>
 
@@ -74,5 +90,13 @@ export default {
   button {
     padding: 8px 20px;
   }
+}
+.input {
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 20px;
+  margin: 0 auto;
+  color: #c78f22;
+  border: none;
 }
 </style>

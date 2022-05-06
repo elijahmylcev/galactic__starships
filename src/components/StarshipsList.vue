@@ -1,5 +1,5 @@
 <template>
-  <div style="height: content" class="item-list list-group">
+  <div class="item-list list-group">
     <router-link
     v-for="item in items"
     :key="item.id"
