@@ -2,8 +2,9 @@
   <div class="home">
     <h1>Starships</h1>
     <search v-model="searchQuery"/>
+    <button @click="SearchedList">Search...</button>
     <StarshipsList
-      :items="SearchedList"
+      :items="starships.value"
       namingProperty="name"
       class="list"
     />
@@ -40,7 +41,7 @@ export default {
   }),
 
   async mounted() {
-    const starships = await _service.getAllStarships(this.page);
+    const starships = await _service.getStarshipsOnCurrentPage(this.page);
     this.starships.value = [...starships];
   },
 
@@ -48,29 +49,27 @@ export default {
     async onNext() {
       if (this.page <= 3) {
         this.page += 1;
-        const starships = await _service.getAllStarships(this.page);
+        const starships = await _service.getStarshipsOnCurrentPage(this.page);
         this.starships.value = [...starships];
       }
     },
     async onPrev() {
       if (this.page >= 2 && this.page <= 4) {
         this.page -= 1;
-        const starships = await _service.getAllStarships(this.page);
+        const starships = await _service.getStarshipsOnCurrentPage(this.page);
         this.starships.value = [...starships];
       }
     },
-  },
-
-  computed: {
-    SearchedList() {
+    async SearchedList() {
       if (this.searchQuery !== '') {
-        return this.starships.value.filter((starship) => starship.name.toLowerCase()
-          .includes(this.searchQuery.toLowerCase()));
+        // return this.starships.value.filter((starship) => starship.name.toLowerCase()
+        //   .includes(this.searchQuery.toLowerCase()));
+        const starships = await _service.findStarshipsByName(this.searchQuery);
+        this.starships.value = [...starships];
       }
       return this.starships.value;
     },
   },
-
 };
 </script>
 
