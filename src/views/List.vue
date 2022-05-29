@@ -10,8 +10,10 @@
     />
 
     <div class="button__wrapper">
-      <button type="button" class="btn btn-outline-light" @click="onPrev"> prev </button>
-      <button type="button" class="btn btn-outline-light" @click="onNext"> next </button>
+      <button type="button" v-if="page !== 1"
+      class="btn btn-outline-light" @click="onPrev"> prev </button>
+      <button type="button" v-if="starships.value.length == 10"
+       class="btn btn-outline-light" @click="onNext"> next </button>
     </div>
   </div>
 </template>
@@ -62,10 +64,10 @@ export default {
     },
     async SearchedList() {
       if (this.searchQuery !== '') {
-        // return this.starships.value.filter((starship) => starship.name.toLowerCase()
-        //   .includes(this.searchQuery.toLowerCase()));
         const starships = await _service.findStarshipsByName(this.searchQuery);
         this.starships.value = [...starships];
+        this.page = null;
+        console.log(this.starships.value, this.page);
       }
       return this.starships.value;
     },
